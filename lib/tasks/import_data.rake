@@ -1,6 +1,8 @@
 namespace :import_data do
   task import_frequencies: :environment do
-    require 'csv'    
+    require 'csv'   
+    Frequency.delete_all
+    ActiveRecord::Base.connection.reset_pk_sequence!('frequencies') 
     csv_length = CSV.read('lib/assets/words_freq.csv').count
     csv_text = File.read('lib/assets/words_freq.csv')
     csv = CSV.parse(csv_text, :headers => true)
