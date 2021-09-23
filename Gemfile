@@ -62,3 +62,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'colorize'
 gem 'table_print'
 gem 'chunky_png'
+gem 'dotenv-rails'

@@ -9,6 +9,7 @@ namespace :perform do
     puts "** Text color allocated **".cyan
     Rake::Task["book_to_pic:create_image"].invoke
     puts "** Image generated **".cyan
+    UserMailer.welcome_email.deliver_now
     puts "**************"
     puts "** All done **".green
   end
@@ -55,6 +56,7 @@ namespace :perform do
     Rake::Task["perform:generate_colors"].invoke
     Rake::Task["perform:import_book"].invoke
     Rake::Task["perform:create_picture"].invoke
+    UserMailer.welcome_email.deliver_now
     puts "**************"
     puts "** All done **".green
   end
