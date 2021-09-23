@@ -16,7 +16,7 @@ namespace :colors do
       one_frequency.update(color_g: g)
       one_frequency.update(color_b: b)
       progress = one_frequency.rank * 100 / frequency_length
-      puts "(#{progress}%)".magenta + " saving frequency" + "#{one_frequency.color_r}".red + "#{one_frequency.color_g}".green + "#{one_frequency.color_b}".blue
+      #puts "(#{progress}%)".magenta + " saving frequency" + "#{one_frequency.color_r}".red + "#{one_frequency.color_g}".green + "#{one_frequency.color_b}".blue
     end
   end
 
@@ -35,7 +35,7 @@ namespace :colors do
       one_name.update(color_g: g)
       one_name.update(color_b: b)
       progress = one_name.rank * 100 / name_length
-      puts "(#{progress}%)".magenta + " saving name" + "#{one_name.color_r}".red + "#{one_name.color_g}".green + "#{one_name.color_b}".blue
+      #puts "(#{progress}%)".magenta + " saving name" + "#{one_name.color_r}".red + "#{one_name.color_g}".green + "#{one_name.color_b}".blue
     end
   end
 
@@ -51,7 +51,7 @@ namespace :colors do
       g = (255 - b - r).to_i
       Number.create!(name: one_number, color_r: r, color_g: g, color_b: b)
       progress = one_number * 100 / name_length
-      puts "(#{progress}%)".magenta + " saving number"
+      #puts "(#{progress}%)".magenta + " saving number"
     end
   end
 end

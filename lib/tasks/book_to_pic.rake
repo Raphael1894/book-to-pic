@@ -1,32 +1,32 @@
 namespace :book_to_pic do
   desc 'TODO'
 
-  task generate_matrice: :environment do
-    require "matrix"
-    Matrice.delete_all
-    ActiveRecord::Base.connection.reset_pk_sequence!('matrices') 
-    book_length = Text.count
-    square_root =  Math.sqrt(book_length).to_i
-    all_words = Text.all
-    matrix = []
-    temporary_matrix = []
-    x = 1
-    all_words.each do |one_word|
-      if temporary_matrix.count <= square_root
-        temporary_matrix << one_word.word
-      else
-        matrix << temporary_matrix
-        temporary_matrix = []
-      end
-      progress = x * 100 / book_length
-      puts "#{temporary_matrix}".cyan
-      x = x + 1
-    end
-    puts "#{matrix}".magenta
-    #mat = Matrix.columns(matrix)
-    #puts "#{mat}".cyan
-    Matrice.create!(mat: matrix)
-  end
+  #task generate_matrice: :environment do
+  #  require "matrix"
+  #  Matrice.delete_all
+  #  ActiveRecord::Base.connection.reset_pk_sequence!('matrices') 
+  #  book_length = Text.count
+  #  square_root =  Math.sqrt(book_length).to_i
+  #  all_words = Text.all
+  #  matrix = []
+  #  temporary_matrix = []
+  #  x = 1
+  #  all_words.each do |one_word|
+  #    if temporary_matrix.count <= square_root
+  #      temporary_matrix << one_word.word
+  #    else
+  #      matrix << temporary_matrix
+  #      temporary_matrix = []
+  #    end
+  #    progress = x * 100 / book_length
+  #    puts "#{temporary_matrix}".cyan
+  #    x = x + 1
+  #  end
+  #  puts "#{matrix}".magenta
+  #  #mat = Matrix.columns(matrix)
+  #  #puts "#{mat}".cyan
+  #  Matrice.create!(mat: matrix)
+  #end
 
   task color_text: :environment do
     Missing.delete_all
@@ -56,28 +56,28 @@ namespace :book_to_pic do
             one_text.update(color_r: 0)
             one_text.update(color_g: 0)
             one_text.update(color_b: 0)
-            puts "word not found : #{one_text.word} position #{one_text.position}".red
+            #puts "word not found : #{one_text.word} position #{one_text.position}".red
             Missing.create!(word: one_text.word, position: one_text.position)
           end
         end
       end
       progress = x * 100 / text_length
-      puts "(#{progress}%)".magenta + " saved " +  "#{one_text.word}".cyan
+      #puts "(#{progress}%)".magenta + " saved " +  "#{one_text.word}".cyan
       x = x + 1
     end
     Text.order('id ASC')
     if Missing.any?
-      puts "** List of missing words **".red
+      #puts "** List of missing words **".red
       all_missed = Missing.all
       all_missed.each do |one_missed|
-        puts "word not found : " + "*#{one_missed.word}* ".cyan + "position #{one_missed.position}".green
+        #puts "word not found : " + "*#{one_missed.word}* ".cyan + "position #{one_missed.position}".green
       end
     end
   end
 
   task create_image: :environment do
     require 'chunky_png'
-    filename = "TheEgg"
+    filename = "the-fellowship-of-the-ring"
     book_length = Text.count
     square_root =  Math.sqrt(book_length).to_i
     all_words = Text.all

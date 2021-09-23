@@ -10,7 +10,7 @@ namespace :import_data do
     csv.each do |row|
       row[:rank] = x
       progress = x * 100 / csv_length
-      puts "(#{progress}%)".magenta + " saving #{row}".cyan
+      #puts "(#{progress}%)".magenta + " saving #{row}".cyan
       Frequency.create!(row.to_hash)
       x = x + 1
     end
@@ -29,7 +29,7 @@ namespace :import_data do
       row.each { |k, v| v.downcase! }
       row[:rank] = x
       progress = x * 100 / csv_length
-      puts "(#{progress}%)".magenta + " saving #{row} #{x} (#{progress}%)".cyan
+      #puts "(#{progress}%)".magenta + " saving #{row} #{x} (#{progress}%)".cyan
       Name.create!(row.to_hash)
       x = x + 1
     end
@@ -38,14 +38,14 @@ namespace :import_data do
   task import_text: :environment do
     Text.delete_all
     ActiveRecord::Base.connection.reset_pk_sequence!('texts')
-    file = File.open('lib/assets/text_to_db.txt')
+    file = File.open('lib/assets/the-fellowship-of-the-ring.txt')
     total_lines = file.readlines.size # Get total lines number
     file.seek(0)
     x = 1
     file.each_with_index do |line,index|
       current_line_nb = index + 1
       progress = current_line_nb * 100 / total_lines
-      puts "(#{progress}%)".magenta + " Reading line #{current_line_nb} out of #{total_lines}".cyan
+      #puts "(#{progress}%)".magenta + " Reading line #{current_line_nb} out of #{total_lines}".cyan
     words = []
     line = line.gsub("-", " ")
     words = line.split(/\s/).delete_if(&:blank?)
@@ -80,7 +80,7 @@ namespace :import_data do
         word.gsub!("didn’t", "did not")
         word.gsub!("haven’t", "have not")
         word.gsub!("they’ll", "they will")
-        puts "saving #{word} #{x} ".cyan
+        #puts "saving #{word} #{x} ".cyan
         if word == "i am"
           words = word.split(/\s/).delete_if(&:blank?)
           words.each do |word|
