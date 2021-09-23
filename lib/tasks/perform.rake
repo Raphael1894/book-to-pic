@@ -3,7 +3,12 @@ namespace :perform do
   task perform: :environment do
     require "rake"
     puts "** Creation started **".yellow
-
+    Rake::Task["import_data:import_text"].invoke
+    puts "** Text imported **".cyan
+    Rake::Task["book_to_pic:color_text"].invoke
+    puts "** Text color allocated **".cyan
+    Rake::Task["book_to_pic:create_image"].invoke
+    puts "** Image generated **".cyan
     puts "**************"
     puts "** All done **".green
   end
@@ -14,8 +19,6 @@ namespace :perform do
     puts "** Frequencies imported **".cyan
     Rake::Task["import_data:import_names"].invoke
     puts "** Names imported **".cyan
-    Rake::Task["import_data:import_text"].invoke
-    puts "** Text imported **".cyan
     puts "** All done importing data **".green
   end
 
