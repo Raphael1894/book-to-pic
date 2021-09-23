@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_22_105536) do
+ActiveRecord::Schema.define(version: 2021_09_23_091756) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,9 @@ ActiveRecord::Schema.define(version: 2021_09_22_105536) do
     t.bigint "rank"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "color_r", default: 0
+    t.integer "color_g", default: 0
+    t.integer "color_b", default: 0
   end
 
   create_table "names", force: :cascade do |t|
@@ -28,6 +31,9 @@ ActiveRecord::Schema.define(version: 2021_09_22_105536) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "rank"
+    t.integer "color_r", default: 0
+    t.integer "color_g", default: 0
+    t.integer "color_b", default: 0
   end
 
   create_table "texts", force: :cascade do |t|
@@ -35,6 +41,9 @@ ActiveRecord::Schema.define(version: 2021_09_22_105536) do
     t.bigint "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "color_r", default: 0
+    t.integer "color_g", default: 0
+    t.integer "color_b", default: 0
   end
 
   create_table "word_frequencies", force: :cascade do |t|
