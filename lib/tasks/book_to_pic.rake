@@ -53,9 +53,6 @@ namespace :book_to_pic do
             one_text.update(color_g: one_number.color_g)
             one_text.update(color_b: one_number.color_b)
           else
-            one_text.update(color_r: 0)
-            one_text.update(color_g: 0)
-            one_text.update(color_b: 0)
             #puts "word not found : #{one_text.word} position #{one_text.position}".red
             Missing.create!(word: one_text.word, position: one_text.position)
           end
@@ -67,10 +64,10 @@ namespace :book_to_pic do
     end
     Text.order('id ASC')
     if Missing.any?
-      #puts "** List of missing words **".red
+      puts "** List of missing words **".red
       all_missed = Missing.all
       all_missed.each do |one_missed|
-        #puts "word not found : " + "*#{one_missed.word}* ".cyan + "position #{one_missed.position}".green
+        puts "word not found : " + "*#{one_missed.word}* ".cyan + "position #{one_missed.position}".green
       end
     end
   end
