@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_23_091756) do
+ActiveRecord::Schema.define(version: 2021_09_23_115207) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,19 @@ ActiveRecord::Schema.define(version: 2021_09_23_091756) do
     t.integer "color_b", default: 0
   end
 
+  create_table "matrices", force: :cascade do |t|
+    t.string "mat"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "missings", force: :cascade do |t|
+    t.string "word"
+    t.bigint "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "names", force: :cascade do |t|
     t.string "firstName"
     t.datetime "created_at", null: false
@@ -34,6 +47,15 @@ ActiveRecord::Schema.define(version: 2021_09_23_091756) do
     t.integer "color_r", default: 0
     t.integer "color_g", default: 0
     t.integer "color_b", default: 0
+  end
+
+  create_table "numbers", force: :cascade do |t|
+    t.integer "name"
+    t.integer "color_r", default: 0
+    t.integer "color_g", default: 0
+    t.integer "color_b", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "texts", force: :cascade do |t|

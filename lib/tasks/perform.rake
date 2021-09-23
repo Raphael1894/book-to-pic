@@ -1,5 +1,5 @@
 namespace :perform do
-  task allocate_colors_to_names: :environment do
+  task generate_db: :environment do
 
   end
 end
