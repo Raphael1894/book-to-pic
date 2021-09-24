@@ -1,9 +1,53 @@
 namespace :fluid_colors do
 
+  task texts: :environment do
+    Missing.delete_all
+    ActiveRecord::Base.connection.reset_pk_sequence!('missings') 
+    all_text = Text.order(:id)
+    text_length = Text.count
+    x = 1
+    all_text.each do |one_text|
+      one_frequency = Frequency.find_by(word: one_text.word)
+        if one_frequency != nil
+          one_text.update(color_r: one_frequency.color_r)
+          one_text.update(color_g: one_frequency.color_g)
+          one_text.update(color_b: one_frequency.color_b)
+        else 
+        one_name = Name.find_by(firstName: one_text.word)
+        if one_name != nil
+          one_text.update(color_r: one_name.color_r)
+          one_text.update(color_g: one_name.color_g)
+          one_text.update(color_b: one_name.color_b)
+        else
+          one_number = Number.find_by(name: one_text.word)
+          if one_number != nil
+            one_text.update(color_r: one_number.color_r)
+            one_text.update(color_g: one_number.color_g)
+            one_text.update(color_b: one_number.color_b)
+          else
+            #puts "word not found : #{one_text.word} position #{one_text.position}".red
+            Missing.create!(word: one_text.word, position: one_text.position)
+          end
+        end
+      end
+      progress = x * 100 / text_length
+      #puts "(#{progress}%)".magenta + " saved " +  "#{one_text.word}".cyan
+      x = x + 1
+    end
+    Text.order('id ASC')
+    if Missing.any?
+      puts "** List of missing words **".red
+      all_missed = Missing.order(:id)
+      all_missed.each do |one_missed|
+        puts "word not found : " + "*#{one_missed.word}* ".cyan + "position #{one_missed.position}".green
+      end
+    end
+  end
+
   task frequencies: :environment do
     all_frequencies = Frequency.order(:id)
     frequencies_length = Frequency.count
-    puts "#{frequencies_length}".yellow
+    #puts "#{frequencies_length}".yellow
     rgb_maximum = 16777216
     ascent = true
     steps = (rgb_maximum / frequencies_length)
@@ -26,7 +70,7 @@ namespace :fluid_colors do
           one_frequency.update(color_g: green.to_i)
           one_frequency.update(color_b: blue.to_i)
           progress = one_frequency.id * 100 / frequencies_length
-          puts "(#{progress}%)".magenta + " saving name " + "#{one_frequency.color_r} ".red + "#{one_frequency.color_g} ".green + "#{one_frequency.color_b}".blue
+          #puts "(#{progress}%)".magenta + " saving name " + "#{one_frequency.color_r} ".red + "#{one_frequency.color_g} ".green + "#{one_frequency.color_b}".blue
           x = x + steps
           value = value + steps
         end
@@ -43,7 +87,7 @@ namespace :fluid_colors do
           one_frequency.update(color_g: green.to_i)
           one_frequency.update(color_b: blue.to_i)
           progress = one_frequency.id * 100 / frequencies_length
-          puts "(#{progress}%)".magenta + " saving name " + "#{one_frequency.color_r} ".red + "#{one_frequency.color_g} ".green + "#{one_frequency.color_b}".blue
+          #puts "(#{progress}%)".magenta + " saving name " + "#{one_frequency.color_r} ".red + "#{one_frequency.color_g} ".green + "#{one_frequency.color_b}".blue
           y = y + steps
           value = value - steps
         end
@@ -54,7 +98,7 @@ namespace :fluid_colors do
   task names: :environment do
     all_names = Name.order(:id)
     name_length = Name.count
-    puts "#{name_length}".yellow
+    #puts "#{name_length}".yellow
     rgb_maximum = 16777216
     ascent = true
     steps = (rgb_maximum / name_length)
@@ -77,7 +121,7 @@ namespace :fluid_colors do
           one_name.update(color_g: green.to_i)
           one_name.update(color_b: blue.to_i)
           progress = one_name.id * 100 / name_length
-          puts "(#{progress}%)".magenta + " saving name " + "#{one_name.color_r} ".red + "#{one_name.color_g} ".green + "#{one_name.color_b}".blue
+          #puts "(#{progress}%)".magenta + " saving name " + "#{one_name.color_r} ".red + "#{one_name.color_g} ".green + "#{one_name.color_b}".blue
           x = x + steps
           value = value + steps
         end
@@ -94,7 +138,7 @@ namespace :fluid_colors do
           one_name.update(color_g: green.to_i)
           one_name.update(color_b: blue.to_i)
           progress = one_name.id * 100 / name_length
-          puts "(#{progress}%)".magenta + " saving name " + "#{one_name.color_r} ".red + "#{one_name.color_g} ".green + "#{one_name.color_b}".blue
+          #puts "(#{progress}%)".magenta + " saving name " + "#{one_name.color_r} ".red + "#{one_name.color_g} ".green + "#{one_name.color_b}".blue
           y = y + steps
           value = value - steps
         end
@@ -106,7 +150,7 @@ namespace :fluid_colors do
     Number.delete_all
     ActiveRecord::Base.connection.reset_pk_sequence!('numbers')
     number_length = 100000
-    puts "#{number_length}".yellow
+    #puts "#{number_length}".yellow
     rgb_maximum = 16777216
     ascent = true
     steps = (rgb_maximum / number_length)

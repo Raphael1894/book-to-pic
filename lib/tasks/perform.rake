@@ -3,12 +3,16 @@ namespace :perform do
   task create: :environment do
     require "rake"
     puts "** Creation started **".yellow
+    Rake::Task["fluid_colors:numbers"].invoke
+    puts "** Numbers created and colored **".cyan
+    Rake::Task["spiral:numbers"].invoke
+    puts "** Image numbers generated **".cyan
     Rake::Task["import_data:import_text"].invoke
     puts "** Text imported **".cyan
-    Rake::Task["book_to_pic:color_text"].invoke
+    Rake::Task["fluid_colors:texts"].invoke
     puts "** Text color allocated **".cyan
-    Rake::Task["book_to_pic:create_image"].invoke
-    puts "** Image generated **".cyan
+    Rake::Task["spiral:texts"].invoke
+    puts "** Image texts generated **".cyan
     UserMailer.welcome_email.deliver_now
     puts "**************"
     puts "** All done **".green

@@ -38,7 +38,7 @@ namespace :import_data do
   task import_text: :environment do
     Text.delete_all
     ActiveRecord::Base.connection.reset_pk_sequence!('texts')
-    file = File.open('lib/assets/the_egg.txt')
+    file = File.open('lib/assets/the_fellowship_of_the_ring.txt')
     total_lines = file.readlines.size # Get total lines number
     file.seek(0)
     x = 1

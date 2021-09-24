@@ -48,7 +48,7 @@ namespace :simple_colors do
   task frequencies: :environment do
     all_frequencies = Frequency.order(:id)
     frequency_length = Frequency.count
-    puts "#{frequency_length}".yellow
+    #puts "#{frequency_length}".yellow
     rgb_maximum = 16777216
     value = 0
     steps = (rgb_maximum / frequency_length)
@@ -71,7 +71,7 @@ namespace :simple_colors do
   task names: :environment do
     all_names = Name.order(:id)
     name_length = Name.count
-    puts "#{name_length}".yellow
+    #puts "#{name_length}".yellow
     rgb_maximum = 16777216
     value = 0
     steps = (rgb_maximum / name_length)
