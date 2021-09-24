@@ -1,6 +1,6 @@
 namespace :perform do
 
-  task perform: :environment do
+  task create: :environment do
     require "rake"
     puts "** Creation started **".yellow
     Rake::Task["import_data:import_text"].invoke
@@ -56,6 +56,30 @@ namespace :perform do
     Rake::Task["perform:generate_colors"].invoke
     Rake::Task["perform:import_book"].invoke
     Rake::Task["perform:create_picture"].invoke
+    UserMailer.welcome_email.deliver_now
+    puts "**************"
+    puts "** All done **".green
+  end
+
+
+
+
+  task new: :environment do
+    require "rake"
+    puts "** Creation started **".yellow
+    #Rake::Task["colors:allocate_colors_to_frequencies"].invoke
+    #puts "** Frequencies colors allocated **".cyan
+    Rake::Task["colors:allocate_colors_to_numbers"].invoke
+    puts "** Numbers colors allocated **".cyan
+    Rake::Task["book_to_pic:color_text"].invoke
+    puts "** Text color allocated **".cyan
+    Rake::Task["book_to_pic:create_image"].invoke
+    puts "** Image generated **".cyan
+    UserMailer.welcome_email.deliver_now
+    Rake::Task["colors:test_frequencies_colors"].invoke
+    puts "** Frequencies colors image generated **".cyan
+    Rake::Task["colors:test_numbers_colors"].invoke
+    puts "** Numbers colors image generated **".cyan
     UserMailer.welcome_email.deliver_now
     puts "**************"
     puts "** All done **".green
