@@ -158,33 +158,31 @@ namespace :fluid_colors do
     step_to_g_n_b = (g_n_b_max / steps)
     value = 0
     x = 0
-    y = 0
+    y = 66666
     (0..number_length).each do |one_number|
       if ascent == true
+        red = value / (256*256)
+        green = (value/256) % 256
+        blue = value % 256
+        Number.create!(name: one_number, color_r: red, color_g: green, color_b: blue)
+        x = x + steps
+        value = value + steps
         if x > g_n_b_max
           value = value + 65536
           ascent = false
           y = 0
-        else
-          red = value / (256*256)
-          green = (value/256) % 256
-          blue = value % 256
-          Number.create!(name: one_number, color_r: red, color_g: green, color_b: blue)
-          x = x + steps
-          value = value + steps
         end
       else
-        if y >= g_n_b_max
+        red = value / (256*256)
+        green = (value/256) % 256
+        blue = value % 256
+        Number.create!(name: one_number, color_r: red, color_g: green, color_b: blue)
+        y = y + steps
+        value = value - steps
+        if y > g_n_b_max
           value = value + 65536
           ascent = true
           x = 0
-        else
-          red = value / (256*256)
-          green = (value/256) % 256
-          blue = value % 256
-          Number.create!(name: one_number, color_r: red, color_g: green, color_b: blue)
-          y = y + steps
-          value = value - steps
         end
       end
     end

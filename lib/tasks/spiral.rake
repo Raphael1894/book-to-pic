@@ -2,13 +2,13 @@ namespace :spiral do
 
   task texts: :environment do
     require 'chunky_png'
-    filename = "book_spiral"
+    filename = "lolita_brg"
     texts_length = Text.count
     square_root =  Math.sqrt(texts_length).to_i
-    size = square_root + 1
+    size = square_root + 2
     png = ChunkyPNG::Image.new(size, size, ChunkyPNG::Color::TRANSPARENT)
-    x = square_root / 2
-    y = square_root / 2
+    x = (size / 2).round
+    y = (size / 2).round
     a = 1
     n = 1
     while n < texts_length
@@ -16,49 +16,50 @@ namespace :spiral do
         if Text.exists?(id: n)
           one_word = Text.find(n)
           #puts "x : #{x}".green + " y : #{y}".cyan + " a : #{a}".yellow
-          png[x,y] = ChunkyPNG::Color.rgb(one_word.color_r, one_word.color_g, one_word.color_b)
+          png[x,y] = ChunkyPNG::Color.rgb(one_word.color_b, one_word.color_r, one_word.color_g)
           x = x - 1
           n = n + 1
         else 
           break
+        end
       end
-    end
       (1..a).each do
         if Text.exists?(id: n)
           one_word = Text.find(n)
           #puts "x : #{x}".green + " y : #{y}".cyan + " a : #{a}".yellow
-          png[x,y] = ChunkyPNG::Color.rgb(one_word.color_r, one_word.color_g, one_word.color_b)
+          png[x,y] = ChunkyPNG::Color.rgb(one_word.color_b, one_word.color_r, one_word.color_g)
           y = y - 1
           n = n + 1
         else 
           break
+        end
       end
-    end
       a = a + 1
       (1..a).each do
         if Text.exists?(id: n)
           one_word = Text.find(n)
           #puts "x : #{x}".green + " y : #{y}".cyan + " a : #{a}".yellow
-          png[x,y] = ChunkyPNG::Color.rgb(one_word.color_r, one_word.color_g, one_word.color_b)
+          png[x,y] = ChunkyPNG::Color.rgb(one_word.color_b, one_word.color_r, one_word.color_g)
           x = x + 1
           n = n + 1
         else 
           break
+        end
       end
-    end
       (1..a).each do
         if Text.exists?(id: n)
           one_word = Text.find(n)
           #puts "x : #{x}".green + " y : #{y}".cyan + " a : #{a}".yellow
-          png[x,y] = ChunkyPNG::Color.rgb(one_word.color_r, one_word.color_g, one_word.color_b)
+          png[x,y] = ChunkyPNG::Color.rgb(one_word.color_b, one_word.color_r, one_word.color_g)
           y = y + 1
           n = n + 1
         else 
           break
+        end
       end
+    a = a + 1
     end
-      a = a + 1
-    end
+  puts "file saved".green
   png.save("#{filename}.png", :best_compression)
   end
 
@@ -67,10 +68,10 @@ namespace :spiral do
     filename = "frequencies_spiral"
     frequencies_length = Frequency.count
     square_root =  Math.sqrt(frequencies_length).to_i
-    size = square_root + 1
+    size = square_root + 2
     png = ChunkyPNG::Image.new(size, size, ChunkyPNG::Color::TRANSPARENT)
-    x = square_root / 2 + 1
-    y = square_root / 2
+    x = (size / 2).round
+    y = (size / 2).round
     a = 1
     n = 1
     while n < frequencies_length
@@ -78,48 +79,48 @@ namespace :spiral do
         if Frequency.exists?(id: n)
           one_frequency = Frequency.find(n)
           #puts "x : #{x}".green + " y : #{y}".cyan + " a : #{a}".yellow
-          png[x,y] = ChunkyPNG::Color.rgb(one_frequency.color_r, one_frequency.color_g, one_frequency.color_b)
+          png[x,y] = ChunkyPNG::Color.rgb(one_word.color_r, one_word.color_g, one_word.color_b)
           x = x - 1
           n = n + 1
         else 
           break
+        end
       end
-    end
       (1..a).each do
         if Frequency.exists?(id: n)
           one_frequency = Frequency.find(n)
           #puts "x : #{x}".green + " y : #{y}".cyan + " a : #{a}".yellow
-          png[x,y] = ChunkyPNG::Color.rgb(one_frequency.color_r, one_frequency.color_g, one_frequency.color_b)
+          png[x,y] = ChunkyPNG::Color.rgb(one_word.color_r, one_word.color_g, one_word.color_b)
           y = y - 1
           n = n + 1
         else 
           break
+        end
       end
-    end
       a = a + 1
       (1..a).each do
         if Frequency.exists?(id: n)
           one_frequency = Frequency.find(n)
           #puts "x : #{x}".green + " y : #{y}".cyan + " a : #{a}".yellow
-          png[x,y] = ChunkyPNG::Color.rgb(one_frequency.color_r, one_frequency.color_g, one_frequency.color_b)
+          png[x,y] = ChunkyPNG::Color.rgb(one_word.color_r, one_word.color_g, one_word.color_b)
           x = x + 1
           n = n + 1
         else 
           break
+        end
       end
-    end
       (1..a).each do
         if Frequency.exists?(id: n)
           one_frequency = Frequency.find(n)
           #puts "x : #{x}".green + " y : #{y}".cyan + " a : #{a}".yellow
-          png[x,y] = ChunkyPNG::Color.rgb(one_frequency.color_r, one_frequency.color_g, one_frequency.color_b)
+          png[x,y] = ChunkyPNG::Color.rgb(one_word.color_r, one_word.color_g, one_word.color_b)
           y = y + 1
           n = n + 1
         else 
           break
+        end
       end
-    end
-      a = a + 1
+    a = a + 1
     end
   png.save("#{filename}.png", :best_compression)
   end
@@ -129,10 +130,10 @@ namespace :spiral do
     filename = "names_spiral"
     names_length = Name.count
     square_root =  Math.sqrt(names_length).to_i
-    size = square_root + 1
+    size = square_root + 2
     png = ChunkyPNG::Image.new(size, size, ChunkyPNG::Color::TRANSPARENT)
-    x = square_root / 2
-    y = square_root / 2
+    x = (size / 2).round
+    y = (size / 2).round
     a = 1
     n = 1
     while n < names_length
@@ -145,8 +146,8 @@ namespace :spiral do
           n = n + 1
         else 
           break
+        end
       end
-    end
       (1..a).each do
         if Name.exists?(id: n)
           one_name = Name.find(n)
@@ -156,8 +157,8 @@ namespace :spiral do
           n = n + 1
         else 
           break
+        end
       end
-    end
       a = a + 1
       (1..a).each do
         if Name.exists?(id: n)
@@ -168,8 +169,8 @@ namespace :spiral do
           n = n + 1
         else 
           break
+        end
       end
-    end
       (1..a).each do
         if Name.exists?(id: n)
           one_name = Name.find(n)
@@ -179,9 +180,9 @@ namespace :spiral do
           n = n + 1
         else 
           break
+        end
       end
-    end
-      a = a + 1
+    a = a + 1
     end
   png.save("#{filename}.png", :best_compression)
   end
@@ -191,10 +192,10 @@ namespace :spiral do
     filename = "numbers_spiral"
     numbers_length = Number.count
     square_root =  Math.sqrt(numbers_length).to_i
-    size = square_root + 1
+    size = square_root + 2
     png = ChunkyPNG::Image.new(size, size, ChunkyPNG::Color::TRANSPARENT)
-    x = square_root / 2
-    y = square_root / 2
+    x = (size / 2).round
+    y = (size / 2).round
     a = 1
     n = 1
     while n < numbers_length
@@ -207,8 +208,8 @@ namespace :spiral do
           n = n + 1
         else 
           break
+        end
       end
-    end
       (1..a).each do
         if Number.exists?(id: n)
           one_number = Number.find(n)
@@ -218,8 +219,8 @@ namespace :spiral do
           n = n + 1
         else 
           break
+        end
       end
-    end
       a = a + 1
       (1..a).each do
         if Number.exists?(id: n)
@@ -230,8 +231,8 @@ namespace :spiral do
           n = n + 1
         else 
           break
+        end
       end
-    end
       (1..a).each do
         if Number.exists?(id: n)
           one_number = Number.find(n)
@@ -241,9 +242,9 @@ namespace :spiral do
           n = n + 1
         else 
           break
+        end
       end
-    end
-      a = a + 1
+    a = a + 1
     end
   png.save("#{filename}.png", :best_compression)
   end
