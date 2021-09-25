@@ -56,10 +56,25 @@ namespace :perform do
   task everything: :environment do
     require "rake"
     puts "** Creation started **".yellow
-    Rake::Task["perform:generate_db"].invoke
-    Rake::Task["perform:generate_colors"].invoke
-    Rake::Task["perform:import_book"].invoke
-    Rake::Task["perform:create_picture"].invoke
+    #Rake::Task["import_data:texts"].invoke
+    #puts "** Book imported:texts **".cyan
+    #Rake::Task["fluid_colors:frequencies"].invoke
+    #puts "** Frequencies colors allocated **".cyan
+    #Rake::Task["fluid_colors:names"].invoke
+    #puts "** Names colors allocated **".cyan
+    #Rake::Task["fluid_colors:numbers"].invoke
+    #puts "** Numbers colors allocated **".cyan
+    #Rake::Task["fluid_colors:texts"].invoke
+    #puts "** Text color allocated **".cyan
+
+    #Rake::Task["spiral:texts"].invoke
+    #puts "** Image generated - texts **".cyan
+    #Rake::Task["spiral:names"].invoke
+    #puts "** Image generated - names **".cyan
+    #Rake::Task["spiral:numbers"].invoke
+    #puts "** Image generated - numbers **".cyan
+    Rake::Task["spiral:frequencies"].invoke
+    puts "** Image generated - frequencies **".cyan
     UserMailer.welcome_email.deliver_now
     puts "**************"
     puts "** All done **".green

@@ -2,7 +2,7 @@ namespace :spiral do
 
   task texts: :environment do
     require 'chunky_png'
-    filename = "lolita_brg"
+    filename = "lolita_rgb"
     texts_length = Text.count
     square_root =  Math.sqrt(texts_length).to_i
     size = square_root + 2
@@ -16,18 +16,18 @@ namespace :spiral do
         if Text.exists?(id: n)
           one_word = Text.find(n)
           #puts "x : #{x}".green + " y : #{y}".cyan + " a : #{a}".yellow
-          png[x,y] = ChunkyPNG::Color.rgb(one_word.color_b, one_word.color_r, one_word.color_g)
+          png[x,y] = ChunkyPNG::Color.rgb(one_word.color_r, one_word.color_g, one_word.color_b)
           x = x - 1
           n = n + 1
         else 
           break
         end
       end
-      (1..a).each do
+      (1..a).each do 
         if Text.exists?(id: n)
           one_word = Text.find(n)
           #puts "x : #{x}".green + " y : #{y}".cyan + " a : #{a}".yellow
-          png[x,y] = ChunkyPNG::Color.rgb(one_word.color_b, one_word.color_r, one_word.color_g)
+          png[x,y] = ChunkyPNG::Color.rgb(one_word.color_r, one_word.color_g, one_word.color_b)
           y = y - 1
           n = n + 1
         else 
@@ -39,7 +39,7 @@ namespace :spiral do
         if Text.exists?(id: n)
           one_word = Text.find(n)
           #puts "x : #{x}".green + " y : #{y}".cyan + " a : #{a}".yellow
-          png[x,y] = ChunkyPNG::Color.rgb(one_word.color_b, one_word.color_r, one_word.color_g)
+          png[x,y] = ChunkyPNG::Color.rgb(one_word.color_r, one_word.color_g, one_word.color_b)
           x = x + 1
           n = n + 1
         else 
@@ -50,13 +50,15 @@ namespace :spiral do
         if Text.exists?(id: n)
           one_word = Text.find(n)
           #puts "x : #{x}".green + " y : #{y}".cyan + " a : #{a}".yellow
-          png[x,y] = ChunkyPNG::Color.rgb(one_word.color_b, one_word.color_r, one_word.color_g)
+          png[x,y] = ChunkyPNG::Color.rgb(one_word.color_r, one_word.color_g, one_word.color_b)
           y = y + 1
           n = n + 1
         else 
           break
         end
       end
+      progress = n * 100 / texts_length
+      puts "spiral texts #{progress}%".magenta
     a = a + 1
     end
   puts "file saved".green
@@ -79,7 +81,7 @@ namespace :spiral do
         if Frequency.exists?(id: n)
           one_frequency = Frequency.find(n)
           #puts "x : #{x}".green + " y : #{y}".cyan + " a : #{a}".yellow
-          png[x,y] = ChunkyPNG::Color.rgb(one_word.color_r, one_word.color_g, one_word.color_b)
+          png[x,y] = ChunkyPNG::Color.rgb(one_frequency.color_r, one_frequency.color_g, one_frequency.color_b)
           x = x - 1
           n = n + 1
         else 
@@ -90,7 +92,7 @@ namespace :spiral do
         if Frequency.exists?(id: n)
           one_frequency = Frequency.find(n)
           #puts "x : #{x}".green + " y : #{y}".cyan + " a : #{a}".yellow
-          png[x,y] = ChunkyPNG::Color.rgb(one_word.color_r, one_word.color_g, one_word.color_b)
+          png[x,y] = ChunkyPNG::Color.rgb(one_frequency.color_r, one_frequency.color_g, one_frequency.color_b)
           y = y - 1
           n = n + 1
         else 
@@ -102,7 +104,7 @@ namespace :spiral do
         if Frequency.exists?(id: n)
           one_frequency = Frequency.find(n)
           #puts "x : #{x}".green + " y : #{y}".cyan + " a : #{a}".yellow
-          png[x,y] = ChunkyPNG::Color.rgb(one_word.color_r, one_word.color_g, one_word.color_b)
+          png[x,y] = ChunkyPNG::Color.rgb(one_frequency.color_r, one_frequency.color_g, one_frequency.color_b)
           x = x + 1
           n = n + 1
         else 
@@ -113,13 +115,15 @@ namespace :spiral do
         if Frequency.exists?(id: n)
           one_frequency = Frequency.find(n)
           #puts "x : #{x}".green + " y : #{y}".cyan + " a : #{a}".yellow
-          png[x,y] = ChunkyPNG::Color.rgb(one_word.color_r, one_word.color_g, one_word.color_b)
+          png[x,y] = ChunkyPNG::Color.rgb(one_frequency.color_r, one_frequency.color_g, one_frequency.color_b)
           y = y + 1
           n = n + 1
         else 
           break
         end
       end
+      progress = n * 100 / frequencies_length
+      puts "spiral frequencies #{progress}%".magenta
     a = a + 1
     end
   png.save("#{filename}.png", :best_compression)
@@ -182,6 +186,8 @@ namespace :spiral do
           break
         end
       end
+      progress = n * 100 / names_length
+      puts "spiral names #{progress}%".magenta
     a = a + 1
     end
   png.save("#{filename}.png", :best_compression)
@@ -244,6 +250,8 @@ namespace :spiral do
           break
         end
       end
+      progress = n * 100 / numbers_length
+      puts "spiral numbers #{progress}%".magenta
     a = a + 1
     end
   png.save("#{filename}.png", :best_compression)

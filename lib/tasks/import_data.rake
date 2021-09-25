@@ -35,7 +35,7 @@ namespace :import_data do
     end
   end
 
-  task import_text: :environment do
+  task texts: :environment do
     Text.delete_all
     ActiveRecord::Base.connection.reset_pk_sequence!('texts')
     file = File.open('lib/assets/the_fellowship_of_the_ring.txt')

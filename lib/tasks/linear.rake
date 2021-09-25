@@ -1,9 +1,9 @@
-namespace :book_to_pic do
+namespace :linear do
   desc 'TODO'
 
   task texts: :environment do
     require 'chunky_png'
-    filename = "the_egg"
+    filename = "lolita_linear_rgb"
     book_length = Text.count
     square_root =  Math.sqrt(book_length).to_i
     all_words = Text.order(:id)

@@ -31,6 +31,7 @@ namespace :fluid_colors do
         end
       end
       progress = x * 100 / text_length
+      puts "fluid_colors texts #{progress}%".magenta
       #puts "(#{progress}%)".magenta + " saved " +  "#{one_text.word}".cyan
       x = x + 1
     end
@@ -69,7 +70,6 @@ namespace :fluid_colors do
           one_frequency.update(color_r: red.to_i)
           one_frequency.update(color_g: green.to_i)
           one_frequency.update(color_b: blue.to_i)
-          progress = one_frequency.id * 100 / frequencies_length
           #puts "(#{progress}%)".magenta + " saving name " + "#{one_frequency.color_r} ".red + "#{one_frequency.color_g} ".green + "#{one_frequency.color_b}".blue
           x = x + steps
           value = value + steps
@@ -87,6 +87,7 @@ namespace :fluid_colors do
           one_frequency.update(color_g: green.to_i)
           one_frequency.update(color_b: blue.to_i)
           progress = one_frequency.id * 100 / frequencies_length
+          puts "fluid_colors frequencies #{progress}%".magenta
           #puts "(#{progress}%)".magenta + " saving name " + "#{one_frequency.color_r} ".red + "#{one_frequency.color_g} ".green + "#{one_frequency.color_b}".blue
           y = y + steps
           value = value - steps
@@ -120,7 +121,6 @@ namespace :fluid_colors do
           one_name.update(color_r: red.to_i)
           one_name.update(color_g: green.to_i)
           one_name.update(color_b: blue.to_i)
-          progress = one_name.id * 100 / name_length
           #puts "(#{progress}%)".magenta + " saving name " + "#{one_name.color_r} ".red + "#{one_name.color_g} ".green + "#{one_name.color_b}".blue
           x = x + steps
           value = value + steps
@@ -138,6 +138,7 @@ namespace :fluid_colors do
           one_name.update(color_g: green.to_i)
           one_name.update(color_b: blue.to_i)
           progress = one_name.id * 100 / name_length
+          puts "fluid_colors names #{progress}%".magenta
           #puts "(#{progress}%)".magenta + " saving name " + "#{one_name.color_r} ".red + "#{one_name.color_g} ".green + "#{one_name.color_b}".blue
           y = y + steps
           value = value - steps
@@ -177,6 +178,8 @@ namespace :fluid_colors do
         green = (value/256) % 256
         blue = value % 256
         Number.create!(name: one_number, color_r: red, color_g: green, color_b: blue)
+        progress = one_number * 100 / number_length
+        puts "fluid_colors numbers #{progress}%".magenta
         y = y + steps
         value = value - steps
         if y > g_n_b_max
